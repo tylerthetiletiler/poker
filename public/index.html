@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1411" />
+  <meta name="description" content="Poker Night · Play private Texas Hold'em games online with friends" />
+  <title>Poker Night — Private Texas Hold’em</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <main id="landing" class="landing">
+    <header class="brand brand-large"><span class="brand-icon">♠</span><span>POKER <em>NIGHT</em></span></header>
+    <div class="landing-grid">
+      <section class="intro">
+        <div class="eyebrow"><span class="pulse"></span> YOUR PRIVATE POKER ROOM</div>
+        <h1>Good cards.<br><i>Better company.</i></h1>
+        <p>Real-time Texas Hold’em with your crew. Private tables, invite links, live action, and bragging rights. No downloads. No real money.</p>
+        <div class="feature-pills"><span>♠ 2–8 players</span><span>◉ Live multiplayer</span><span>♢ Play chips only</span></div>
+        <div class="landing-art" aria-hidden="true"><div class="splash-chip big">♠</div><div class="splash-chip small">A</div><div class="splash-card one">A<span>♥</span></div><div class="splash-card two">K<span>♠</span></div></div>
+      </section>
+      <section class="setup-card">
+        <div class="setup-tabs"><button type="button" class="tab active" data-tab="create">CREATE TABLE</button><button type="button" class="tab" data-tab="join">JOIN FRIENDS</button></div>
+        <form id="createForm" class="setup-form">
+          <h2>Host a game</h2><p>Be the dealer. Invite your favorite rivals.</p>
+          <label for="createName">YOUR DISPLAY NAME</label><input id="createName" autocomplete="nickname" maxlength="20" placeholder="e.g. Poker Shark" required />
+          <div class="field-grid"><div><label for="buyIn">STARTING CHIPS</label><select id="buyIn"><option value="2000">2,000 chips</option><option value="1000">1,000 chips</option><option value="5000">5,000 chips</option><option value="10000">10,000 chips</option></select></div>
+          <div><label for="blind">BLINDS</label><select id="blind"><option value="10">10 / 20</option><option value="5">5 / 10</option><option value="25">25 / 50</option><option value="50">50 / 100</option></select></div></div>
+          <button class="primary full" type="submit">Create private table <span>↗</span></button>
+        </form>
+        <form id="joinForm" class="setup-form hidden">
+          <h2>Take a seat</h2><p>Enter your friend’s invite code to join.</p>
+          <label for="joinName">YOUR DISPLAY NAME</label><input id="joinName" autocomplete="nickname" maxlength="20" placeholder="e.g. River Rat" required />
+          <label for="joinCode">TABLE CODE</label><input id="joinCode" class="code-input" maxlength="8" autocapitalize="characters" placeholder="ABC123" required />
+          <button class="primary full" type="submit">Join the table <span>↗</span></button>
+        </form>
+        <div class="setup-footer"><span class="lock">♧</span> Only people with your room link can join.</div>
+      </section>
+    </div>
+  </main>
+
+  <main id="game" class="game hidden">
+    <header class="topbar">
+      <div class="brand"><span class="brand-icon">♠</span><span>POKER <em>NIGHT</em></span></div>
+      <div class="room-pill"><span class="room-pulse"></span> PRIVATE TABLE <b id="roomCode">—</b></div>
+      <div class="top-actions"><button class="ghost" id="copyInvite" type="button"><span>↗</span> Copy invite</button><button class="icon-button" id="audioToggle" type="button" title="Toggle sounds">♪</button><button class="icon-button" id="leaveTable" type="button" title="Leave table">✕</button></div>
+    </header>
+    <div class="game-layout">
+      <section class="game-main">
+        <div class="table-topline"><div><span class="eyebrow">TEXAS HOLD’EM</span><h2 id="roundTitle">Waiting for players</h2></div><div class="table-details"><span id="blindLabel">Blinds 10 / 20</span><span id="playerCount">0 / 8 players</span></div></div>
+        <div class="felt-stage" id="feltStage">
+          <div class="table-outer"><div class="table-inner"><div class="table-watermark">♠</div>
+            <div class="board-area"><div class="pot-name">TOTAL POT</div><div class="pot-amount"><span class="chip-symbol">◉</span> <span id="potAmount">0</span></div>
+              <div class="board-cards" id="boardCards"></div><div class="street-name" id="streetName">LET’S PLAY</div></div>
+          </div></div></div>
+          <div class="seats" id="seats"></div>
+        </div>
+        <div class="action-area" id="actionArea"><div class="idle-message">Invite your friends to take a seat.</div></div>
+        <div class="status-strip"><span class="live-dot"></span><span id="connectionStatus">Connecting…</span><span class="status-right" id="handNumber">Private play-money poker</span></div>
+      </section>
+      <aside class="sidebar">
+        <div class="side-tabs"><button type="button" class="side-tab active" data-side="players">PLAYERS <span id="sideCount">0</span></button><button type="button" class="side-tab" data-side="chat">TABLE CHAT <span id="unreadDot" class="unread hidden"></span></button></div>
+        <div class="side-panel" id="playersPanel"><div class="side-heading">AT THE TABLE <span id="sideHandState">LOBBY</span></div><div id="playerList" class="player-list"></div><div class="side-callout"><div>♠</div><strong>Keep it friendly.</strong><p>Play chips, real competition. No real-money wagers or payouts.</p></div></div>
+        <div class="side-panel hidden" id="chatPanel"><div class="side-heading">TABLE TALK <span>LIVE</span></div><div class="messages" id="messages"></div><form id="chatForm" class="chat-compose"><input id="chatInput" placeholder="Say something…" maxlength="240" autocomplete="off" aria-label="Chat message" /><button type="submit" title="Send chat">➤</button></form></div>
+        <div class="sidebar-footer"><span>♣</span> THE HOUSE NEVER WINS.</div>
+      </aside>
+    </div>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
